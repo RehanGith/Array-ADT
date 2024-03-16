@@ -16,6 +16,9 @@ public:
 	void del(int index);
 	int search(int x);
 	int binary_search(int x);
+	void rotation();
+	void reverse();
+	int max();
 	~Array();
 };
 Array::Array(int n) : size(n), length(0) {
@@ -45,6 +48,7 @@ void Array::display() {
 	for (int i = 0; i < length; i++) {
 		cout << arr[i] << " ";
 	}
+
 	cout << endl;
 }
 void Array::append(int x) {
@@ -97,6 +101,31 @@ int Array::binary_search(int x) {
 			return -1;
 	}
 }
+void Array::reverse() {
+	int temp{};
+	for (int i = 0, j = length - 1; i <= j; i++, j--) {
+		temp = arr[i];
+		arr[i] = arr[j];
+		arr[j] = temp;
+	}
+}
+void Array::rotation() {
+	int temp{};
+	temp = arr[0];
+	for (int i = 0; i < length - 1; i++) {
+		arr[i] = arr[i + 1];
+	}
+	arr[length - 1] = temp;
+}
+int Array::max() {
+	int temp{};
+	temp = arr[0];
+	for (int i = 0; i < length; i++) {
+		if (temp < arr[i])
+			temp = arr[i];
+	}
+	return temp;
+}
 Array::~Array() {
 	delete[] arr;
 }
@@ -104,7 +133,6 @@ int main() {
 	Array a1(15);
 	a1.add();
 	a1.display();
-	cout << a1.search(3) << endl;
-	cout << a1.binary_search(3) << endl;
+	cout << a1.max() << endl;
 	return 0;
 }
