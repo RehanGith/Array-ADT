@@ -13,6 +13,9 @@ public:
 	void display();
 	void append(int n);
 	void insert(int index, int x);
+	void del(int index);
+	int search(int x);
+	int binary_search(int x);
 	~Array();
 };
 Array::Array(int n) : size(n), length(0) {
@@ -53,8 +56,8 @@ void Array::append(int x) {
 	length++;
 }
 void Array::insert(int index, int x) {
-	if (length == size) {
-		cout << "Array is full" << endl;
+	if (index < 0 && length == size) {
+		cout << "invalid index" << endl;
 		return;
 	}
 	for (int i = length; i > index; i--) {
@@ -63,7 +66,37 @@ void Array::insert(int index, int x) {
 	arr[index] = x;
 	length++;
 }
-
+void Array::del(int index) {
+	if (index < 0 && index >= length) {
+		cout << "Invalid index" << endl;
+		return;
+	}
+	for (int i = index; i < length - 1; i++) {
+		arr[i] = arr[i + 1];
+	}
+	length--;
+}
+int Array::search(int x) {
+	for (int i = 0; i < length; i++) {
+		if (arr[i] == x)
+			return i;
+	}
+	return -1;
+}
+int Array::binary_search(int x) {
+	int low = 0, high = length - 1, mid = 0;
+	while (true) {
+		mid = int((low + high) / 2);
+		if (x == arr[mid])
+			return mid;
+		else if (x > arr[mid])
+			low = mid + 1;
+		else
+			high = high - 1;
+		if (low > high)
+			return -1;
+	}
+}
 Array::~Array() {
 	delete[] arr;
 }
@@ -71,9 +104,7 @@ int main() {
 	Array a1(15);
 	a1.add();
 	a1.display();
-	a1.append(29);
-	a1.insert(4, 9);
-	a1.display();
-
+	cout << a1.search(3) << endl;
+	cout << a1.binary_search(3) << endl;
 	return 0;
 }
