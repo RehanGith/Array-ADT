@@ -12,13 +12,14 @@ public:
 	void add();
 	void display();
 	void append(int n);
+	void insert(int index, int x);
 	~Array();
 };
 Array::Array(int n) : size(n), length(0) {
 	arr = new int[size];
 }
 void Array::add() {
-	if (length - 1 == size) {
+	if (length == size) {
 		cout << "Array is full" << endl;
 		return;
 	}
@@ -43,6 +44,26 @@ void Array::display() {
 	}
 	cout << endl;
 }
+void Array::append(int x) {
+	if (length == size) {
+		cout << "Array is full" << endl;
+		return;
+	}
+	arr[length] = x;
+	length++;
+}
+void Array::insert(int index, int x) {
+	if (length == size) {
+		cout << "Array is full" << endl;
+		return;
+	}
+	for (int i = length; i > index; i--) {
+		arr[i] = arr[i - 1];
+	}
+	arr[index] = x;
+	length++;
+}
+
 Array::~Array() {
 	delete[] arr;
 }
@@ -50,4 +71,9 @@ int main() {
 	Array a1(15);
 	a1.add();
 	a1.display();
+	a1.append(29);
+	a1.insert(4, 9);
+	a1.display();
+
+	return 0;
 }
