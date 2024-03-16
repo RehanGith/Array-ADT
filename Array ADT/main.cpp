@@ -19,6 +19,8 @@ public:
 	void rotation();
 	void reverse();
 	int max();
+	void merge(int* p1, int* p2, int m, int n);
+	bool is_sorted();
 	~Array();
 };
 Array::Array(int n) : size(n), length(0) {
@@ -126,13 +128,44 @@ int Array::max() {
 	}
 	return temp;
 }
+bool Array::is_sorted() {
+	for (int i = 0; i < length-1; i++) {
+		if (arr[i] > arr[i + 1])
+			return false;
+	}
+	return true;
+}
+void Array::merge(int* p1, int* p2, int m, int n) {
+	length = m + n;
+	if (length == size) {
+		cout << "size is larger" << endl;
+		return;
+	}
+	int i = 0, j = 0, k = 0;
+	while(j < m && k < n) {
+		if (p1[j] <= p2[k])
+			arr[i++] = p1[j++];
+		else
+			arr[i++] = p2[k++];
+	}
+	for (; k < n; k++) {
+		arr[i++] = p2[k];
+	}
+	for (; j < m; j++) {
+		arr[i++] = p1[j];
+	}
+	
+}
+
 Array::~Array() {
 	delete[] arr;
 }
 int main() {
+	int arr[5] = { 2,5,7,9,12 };
+	int brr[5] = { 3,4,9,13 , 20};
 	Array a1(15);
-	a1.add();
+	a1.merge(&arr[0],&brr[0], 5, 5);
 	a1.display();
-	cout << a1.max() << endl;
+	cout << a1.is_sorted() << endl;
 	return 0;
 }
