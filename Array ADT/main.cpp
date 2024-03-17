@@ -23,6 +23,7 @@ public:
 	bool is_sorted();
 	void bubble_sort();
 	void insertion_sort();
+	void selection_sort();
 	~Array();
 };
 Array::Array(int n) : size(n), length(0) {
@@ -170,7 +171,32 @@ void Array::bubble_sort() {
 	}
 }
 void Array::insertion_sort() {
-
+	int key;
+	for (int i = 0; i < length - 1; i++) {
+		key = arr[i + 1];
+		int j = i;
+		while(j >= 0 and arr[j] > key) {
+			swap(arr[j], arr[j + 1]);
+			j--;
+		}
+		arr[j + 1] = key;
+	}
+}
+void Array::selection_sort() {
+	int min;
+	int c{};
+	for (int i = 1; i < length - 1; i++) {
+		min = arr[i];
+		c = -1;
+		for (int j = i; j < length; j++) {
+			if (min > arr[j]) {
+				min = arr[j];
+				c = j;
+			}
+		}
+		if(c != -1) 
+			swap(arr[i -1], arr[c]);
+	}
 }
 Array::~Array() {
 	delete[] arr;
@@ -179,8 +205,8 @@ int main() {
 	Array a1(15);
 	a1.add();
 	a1.display();
-	a1.bubble_sort();
+	a1.selection_sort();
 	cout << endl;
-	a1.display();
+	a1.display(); 
 	return 0;
 }
