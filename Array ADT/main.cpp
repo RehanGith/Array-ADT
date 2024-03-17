@@ -21,6 +21,8 @@ public:
 	int max();
 	void merge(int* p1, int* p2, int m, int n);
 	bool is_sorted();
+	void bubble_sort();
+	void insertion_sort();
 	~Array();
 };
 Array::Array(int n) : size(n), length(0) {
@@ -148,24 +150,37 @@ void Array::merge(int* p1, int* p2, int m, int n) {
 		else
 			arr[i++] = p2[k++];
 	}
-	for (; k < n; k++) {
+	for (; k < n; k++) 
 		arr[i++] = p2[k];
-	}
-	for (; j < m; j++) {
+	for (; j < m; j++) 
 		arr[i++] = p1[j];
-	}
-	
 }
+void Array::bubble_sort() {
+	int count{ 0 };
+	for (int j = length -1; j > 0; j--) {
+		count = 0;
+		for (int i = 0; i < j; i++) {
+			if (arr[i] > arr[i + 1])
+				swap(arr[i], arr[i + 1]);
+			else
+				count++;
+		}
+		if (count == j)
+			break;
+	}
+}
+void Array::insertion_sort() {
 
+}
 Array::~Array() {
 	delete[] arr;
 }
 int main() {
-	int arr[5] = { 2,5,7,9,12 };
-	int brr[5] = { 3,4,9,13 , 20};
 	Array a1(15);
-	a1.merge(&arr[0],&brr[0], 5, 5);
+	a1.add();
 	a1.display();
-	cout << a1.is_sorted() << endl;
+	a1.bubble_sort();
+	cout << endl;
+	a1.display();
 	return 0;
 }
