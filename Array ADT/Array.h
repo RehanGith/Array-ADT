@@ -2,8 +2,8 @@
 class Array {
 	int* arr;
 	int size;
-	int length;
 public:
+	int length;
 	Array(int n);
 
 	void add();
@@ -21,5 +21,6 @@ public:
 	void bubble_sort();
 	void insertion_sort();
 	void selection_sort();
+	void quick_sort(int i, int j);
 	~Array();
 };

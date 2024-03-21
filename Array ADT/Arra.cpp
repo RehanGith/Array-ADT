@@ -24,6 +24,7 @@ void Array::add() {
 	}
 
 }
+
 void Array::display() {
 	cout << "Data: ";
 	for (int i = 0; i < length; i++) {
@@ -87,7 +88,7 @@ void Array::reverse() {
 	for (int i = 0, j = length - 1; i <= j; i++, j--) {
 		temp = arr[i];
 		arr[i] = arr[j];
-		arr[j] = temp;
+		arr[j]= temp;
 	}
 }
 void Array::rotation() {
@@ -170,6 +171,24 @@ void Array::selection_sort() {
 		}
 		swap(arr[i], arr[min_index]);
 	}
+}
+void Array::quick_sort(int i,int j) {
+	int pivot = i, size = j;
+	i++;
+	if (i > j or j == 0)
+		return;
+	while (i <= j) {
+		if (arr[i] > arr[pivot] && arr[j] <= arr[pivot])
+			swap(arr[i], arr[j]);
+		else if (arr[i] <= arr[pivot])
+			i++;
+		else if (arr[j] > arr[pivot])
+			j-- ;
+	}
+	swap(arr[j], arr[pivot]);
+	quick_sort(0, j - 1);
+	quick_sort(j + 1, size);
+	
 }
 Array::~Array() {
 	delete[] arr;
