@@ -22,5 +22,8 @@ public:
 	void insertion_sort();
 	void selection_sort();
 	void quick_sort(int i, int j);
+	void count_sort();
+	void merge_sort();
+	int single_missing();
 	~Array();
 };

@@ -190,6 +190,34 @@ void Array::quick_sort(int i,int j) {
 	quick_sort(j + 1, size);
 	
 }
+void Array::count_sort() {
+	int max = arr[0];
+	for (int i = 0; i < length; i++) {
+		if (max < arr[i])
+			max = arr[i];
+	}
+	max++;
+	int* brr = new int[max] ();
+	for (int i = 0; i < length; i++)
+		++brr[arr[i]];
+	for (int i = 0, j = 0; i < max; i++) {
+		while (brr[i]) {
+			arr[j] = i;
+			--brr[i];
+			j++;
+		}
+	}
+	delete[] brr;
+}
+void Array::merge_sort() {
+
+}
+int Array::single_missing() {
+	for (int i = 0; i < length; i++) {
+		if (arr[i + 1] - arr[i] > 0)
+			return arr[i] + 1;
+	}
+}
 Array::~Array() {
 	delete[] arr;
 }
